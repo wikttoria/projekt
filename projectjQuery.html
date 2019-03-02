@@ -164,6 +164,7 @@
 					$(this).removeClass("highlightedButton");
 					
 					var panelId = $(this).attr("id") + "Panel";
+					console.log(`Id kliknietego panelu: ${panelId}`);
 					
 					$("#" + panelId).toggleClass("hidden");
 					
