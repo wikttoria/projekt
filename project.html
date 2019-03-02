@@ -1,0 +1,159 @@
+<html>
+
+	<head>
+		
+		<title>Reaction time</title>
+		
+		<style type="text/css">
+		
+		
+				body {
+				
+					font-family: sans-serif;
+				
+				}
+			
+				#shape {
+				
+					width:200px;
+					height:200px;
+					background-color:red;
+					display:none;
+					position:relative;
+					
+					
+					}
+				
+				.bold {
+				
+					font-weight:bold;
+					
+					}
+					
+				#record {
+					
+					width:100px;
+					height:40px;
+					background-color:orange;
+				
+					}
+		</style>
+		
+	</head>
+	
+	<body>
+	
+		<h1>Test your reaction</h1>
+		
+		<p>Click on the boxes  and circles as quickly as you can!</p>
+		
+		<p class="bold">Your time:<span id="timeTaken"></span>  Record:<span id="newrecord"></span><span id="record"> NEW RECORD! </span></p>
+	
+		<div id="shape"></div>
+		
+		
+		<script type="text/javascript">
+		
+			document.getElementById("record").style.display = "none";
+		
+			var start = new Date().getTime();
+			
+			var record=0;
+			
+			function getRandomColor() {
+			
+				var letters = '0123456789ABCDEF'.split('');
+				
+				var color = '#';
+				
+				for (var i =0; i<6 ;i++) {
+				
+					color+=letters[Math.floor(Math.random()*16)];
+				}
+				
+				return color;
+			}
+		
+			function makeShapeAppear() {
+			
+				var top = Math.random()*400;
+				
+				var left = Math.random()*400;
+				
+				var width = Math.random()*400;
+				
+				if (Math.random() > 0.5) {
+				
+					document.getElementById("shape").style.borderRadius = "50%";
+					
+				    } else {
+					
+					document.getElementById("shape").style.borderRadius = "0";
+					}
+				
+				document.getElementById("shape").style.backgroundColor = getRandomColor();
+			
+				document.getElementById("shape").style.width = width + "px";
+				
+				document.getElementById("shape").style.height = width + "px";
+				
+				document.getElementById("shape").style.top = top + "px";
+				
+				document.getElementById("shape").style.left = left + "px";
+			
+				document.getElementById("shape").style.display = "block";
+				
+				document.getElementById("record").style.display = "none";
+				
+				start = new Date().getTime();
+			
+			}
+		
+		     function appearAfterDelay(){
+		
+				setTimeout(makeShapeAppear, Math.random()*2000);
+				
+			}
+		
+			appearAfterDelay();
+			
+			document.getElementById("shape").onclick = function() {
+			
+				document.getElementById("shape").style.display = "none"
+				
+				var end = new Date().getTime();
+				
+				var timeTaken = (end - start)/1000;
+				
+				document.getElementById("timeTaken").innerHTML = timeTaken + "s";
+				
+				appearAfterDelay();
+				
+				
+				
+				if (record>timeTaken)
+				
+					{ record=timeTaken;
+					
+					  document.getElementById("record").style.display = "block"
+					}
+				
+				if(record==0)
+				
+					{record=timeTaken}
+				
+			    document.getElementById("newrecord").innerHTML = record + "s";
+				
+				
+				
+			
+				
+			}
+			
+			
+		
+		</script>
+	
+	</body>
+
+</html>
